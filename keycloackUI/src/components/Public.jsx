@@ -1,8 +1,10 @@
 import React from 'react'
 
+
 const Public = () => {
   return (
-    <div>Public</div>
+    
+    <div className='divErro'> Page Public</div>
   )
 }
 

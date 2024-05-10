@@ -1,0 +1,29 @@
+
+.div,
+.divErro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 320px auto;
+    font-size: 1.2em;
+    /* ajustado o tamanho da fonte */
+    background-color: #4CAF50;
+    /* alterada a cor de fundo para um verde mais suave */
+    color: #fff;
+    /* ajustada a cor do texto para branco */
+    width: 220px;
+    border-radius: 8px;
+    /* adicionado borda arredondada */
+    padding: 20px;
+    /* adicionado espaçamento interno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* adicionada sombra */
+    transition: all 0.9s ease;
+    /* adicionada transição suave */
+    cursor: pointer;
+}
+
+.divErro {
+    background-color: #D32F2F;
+    /* alterada a cor de fundo para vermelho */
+}

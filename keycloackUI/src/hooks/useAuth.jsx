@@ -1,8 +1,31 @@
-import { useState } from 'react'
+import { useEffect, useState, useRef } from 'react';
+import Keycloak from 'keycloak-js';
+
+const client = new Keycloak({
+    url: import.meta.env.VITE_KEYCLOAK_URL,
+    realm: import.meta.env.VITE_KEYCLOAK_REALM,
+    clientId: import.meta.env.VITE_KEYCLOAK_CLIENT,
+});
 
 const useAuth = () => {
-    const [isLogin, setLogin] = useState(false)
-    return isLogin
+    const isRun = useRef(false);
+    const [isLogin, setLogin] = useState(false);
+
+    // instanciando o cliente do Keycloak
+    useEffect(() => {
+        if (isRun.current) return;
+
+        isRun.current = true;
+        client
+            .init({
+                onLoad: 'login-required',
+            })
+            .then((res) => {
+                setLogin(res);
+            });
+    }, []);
+
+    return isLogin;
 };
 
-export default useAuth
+export default useAuth;
