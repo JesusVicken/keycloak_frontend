@@ -1,27 +1,37 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 
-
-
-const Protected = () => {
+const Protected = ({ token }) => {
   const isRun = useRef(false);
+
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     if (isRun.current) return;
-
+    
     isRun.current = true;
-    axios
-      .get('/documents')
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err))
+    
+    const config = {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    }
 
+    axios
+      .get('/documents', config)
+      .then((res) => setData(res.data))
+      .catch((err) => console.log(err));
   }, []);
 
-
-
   return (
-    <div className='div'>Page Protected</div>
-  )
-}
+    <div>
+      {data ? (
+        data.map((rec, i) => <h3 key={i}>{rec}</h3>)
+      ) : (
+        <div className='div'>Page Protected</div>
+      )}
+    </div>
+  );
+};
 
-export default Protected
+export default Protected;

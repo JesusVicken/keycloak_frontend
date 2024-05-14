@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 
 import documents from './Routes/documents.js'
+import authenticate from './Routes/authenticate.js';
 
 (async function () {
     dotenv.config();
@@ -9,7 +10,9 @@ import documents from './Routes/documents.js'
 
     const { PORT } = process.env;
     const app = express();
-    const server = app.listen(PORT, () => console.log(`backend rodando na porta ${PORT}`))
-    
-    app.use("/documents", documents);
-})();
+    const server = app.listen(PORT, () =>
+        console.log(`backend rodando na porta ${PORT}`)
+    );
+
+    app.use("/documents", authenticate, documents);
+})(); 

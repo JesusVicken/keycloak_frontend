@@ -9,6 +9,7 @@ const client = new Keycloak({
 
 const useAuth = () => {
     const isRun = useRef(false);
+    const [token, setToken] = useState(null);
     const [isLogin, setLogin] = useState(false);
 
     // instanciando o cliente do Keycloak
@@ -22,10 +23,11 @@ const useAuth = () => {
             })
             .then((res) => {
                 setLogin(res);
+                setToken(client.token);
             });
     }, []);
 
-    return isLogin;
+    return [isLogin, token];
 };
 
 export default useAuth;
